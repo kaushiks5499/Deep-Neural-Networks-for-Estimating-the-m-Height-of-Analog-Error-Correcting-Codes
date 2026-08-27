@@ -1,4 +1,4 @@
-# Deep-Neural-Networks-for-Estimating-the-m-Height-of-Analog-Error-Correcting-Codes
+# Deep Neural Networks for Estimating the m-Height of Analog Error-Correcting Codes
 
 Course project for **CSCE 636: Deep Learning**, Texas A&M University.
 
@@ -15,7 +15,7 @@ The project covers 21 parameter configurations: `n ∈ {9, 10}`, `k ∈ {4, 5, 6
 
 ## Approach
 
-**1. Dataset generation.** Training labels were generated using an LP-based algorithm (based on Jiang, "Analog Error-Correcting Codes: Designs and Analysis," *IEEE Trans. Information Theory*, 2024) that computes the exact m-height for a given generator matrix. Datasets of up to ~915,000 labeled samples were generated per `(n, k, m)` configuration, split 70/15/15 into train/validation/test sets.
+**1. Dataset generation.** Training labels were generated using an LP-based algorithm (based on Jiang, "Analog Error-Correcting Codes: Designs and Analysis" — see [Reference](#reference) below) that computes the exact m-height for a given generator matrix. Datasets of up to ~915,000 labeled samples were generated per `(n, k, m)` configuration, split 70/15/15 into train/validation/test sets.
 
 **2. Baseline regression models.** A dense neural network was trained per configuration to directly regress the m-height value.
 
@@ -64,10 +64,12 @@ The remaining error on the two hardest configurations (`n=10,k=5,m=5` and `n=10,
 
 ```
 ├── notebooks/
-│   └── m_height_dnn.ipynb      # Full pipeline: data loading, training, evaluation
-├── models/                     # Trained Keras models (one per configuration)
+│   ├── m_height_dnn.ipynb      # Full pipeline: data loading, training, evaluation
+│   └── archive/        # Earlier project versions (Project 1, Project 2)
 ├── README.md
 ```
+
+**Note:** Trained model weights are not included in this repository due to file size (GitHub's web upload limit is 25MB per file, and the largest models here exceed that). All models are fully reproducible by running the notebook end-to-end — training code, hyperparameters, and dataset generation steps are all included. Feel free to reach out if you'd like the trained weights directly.
 
 ## Running the Notebook
 
@@ -77,7 +79,15 @@ The notebook is designed to run in Google Colab. It expects a pre-generated data
 3. Report training/validation curves and final test log-loss
 4. Expose a single callable `DNN_for_m_height(n, k, m, p_list)` for inference on new inputs
 
+## Reference
+
+The exact m-height computation used to generate training labels is based on the LP-based algorithm from:
+
+A. Jiang, "Analog Error-Correcting Codes: Designs and Analysis," *IEEE Transactions on Information Theory*, vol. 70, no. 11, pp. 7740–7756, 2024.
+[https://ieeexplore.ieee.org/document/10663765](https://ieeexplore.ieee.org/document/10663765)
+
 ## Notes
 
 - This repository is shared for portfolio purposes. Dataset generation code and course-provided evaluation utilities have been omitted/redacted where they are not mine to redistribute.
+- Trained model weights are excluded due to file size — see note above.
 - Feedback and questions welcome — feel free to open an issue.
